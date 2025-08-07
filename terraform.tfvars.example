@@ -1,0 +1,10 @@
+# This is a template for the terraform.tfvars file for anyone else using this repo 
+# > cp terraform.tfvars.example terraform.tfvars
+# then replace with your own VPC and subnets, which you can find with: 
+# aws ec2 describe-vpcs --filters Name=isDefault,Values=true --region <your AWS region>
+# aws ec2 describe-subnets --filters Name=vpc-id,Values=vpc-0b5d35a83681ee429 --region <your AWS region> --query "Subnets[*].{ID:SubnetId,AZ:AvailabilityZone}" --output table
+
+
+vpc_id     = "your-vpc-id-here"
+subnet_ids = ["subnet-abc123", "subnet-def456"]
+acm_certificate_arn = "arn:aws:acm:us-east-2:123456789012:certificate/your-certificate-id-here"
