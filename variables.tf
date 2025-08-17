@@ -34,3 +34,12 @@ variable "acm_cert_arn" {
   type        = string
 }
 
+# -------------------------------------
+# Backup configuration
+# -------------------------------------
+variable "backup_bucket_name" {
+  description = "Base name for S3 backup bucket (will have random suffix added)"
+  type        = string
+  default     = "christina-blog-backups"
+}
+
