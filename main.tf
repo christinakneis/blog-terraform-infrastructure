@@ -81,7 +81,9 @@ resource "aws_instance" "web" {
   ami           = var.ami_id                     # Ubuntu AMI (set in variables.tf)
   instance_type = var.instance_type              # t2.micro or similar
   subnet_id     = element(var.subnet_ids, 0)     # Use first subnet in list
-  user_data     = file("${path.module}/user_data.sh")  # Bootstrap shell script
+  user_data     = templatefile("${path.module}/user_data.sh", {
+    bucket_name = aws_s3_bucket.backup_bucket.bucket
+  })  # Bootstrap shell script with dynamic bucket name
   vpc_security_group_ids = [aws_security_group.web_sg.id]  # Attach EC2 security group
   iam_instance_profile = aws_iam_instance_profile.ec2_profile.name  # Allow S3 access
 

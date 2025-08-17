@@ -51,7 +51,7 @@ mkdir -p $BACKUP_DIR
 cp /home/ubuntu/blog-flask-webapp/instance/blog.db $BACKUP_DIR/blog_$DATE.db
 
 # Upload to S3 (bucket name will be available from Terraform output)
-BUCKET_NAME="REPLACE_WITH_ACTUAL_BUCKET_NAME"
+BUCKET_NAME="${bucket_name}"
 aws s3 cp $BACKUP_DIR/blog_$DATE.db s3://$BUCKET_NAME/blog_backups/blog_$DATE.db
 
 # Keep only last 7 local backups
